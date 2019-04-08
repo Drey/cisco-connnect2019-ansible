@@ -1,0 +1,6 @@
+---
+- name: Configuring NTP servers
+  ios_config:
+    commands: "ntp server {{ item }}"
+  loop: "{{ ntp_servers }}"
+  tags: demo2

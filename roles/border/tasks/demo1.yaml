@@ -1,0 +1,15 @@
+---
+- name: Configuring an IOS access-list
+  ios_config:
+    lines:
+      - 'deny   ip any 0.0.0.0 255.0.0.0'
+      - 'deny   ip any 0.0.0.0 255.240.0.0'
+      - 'deny   ip any 0.0.0.0 255.255.0.0'
+      - 'deny   ip 0.0.0.0 255.0.0.0 any'
+      - 'deny   ip 0.0.0.0 255.240.0.0 any'
+      - 'deny   ip 0.0.0.0 255.255.0.0 any'
+    parents: ip access-list extended deny-rfc1918
+    before: no ip access-list extended deny-rfc1918
+    match: exact
+    backup: true
+  tags: demo1

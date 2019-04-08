@@ -1,0 +1,24 @@
+nexus1 ansible_host=172.16.1.131
+nexus2 ansible_host=172.16.1.132
+router1 ansible_host=172.16.1.133
+
+[nxos]
+nexus[1:2]
+
+[ios]
+router1
+
+[lab:children]
+nxos
+ios
+
+[all:vars]
+ansible_user=admin
+ansible_password=admin
+ansible_connection=network_cli
+
+[nxos:vars]
+ansible_network_os=nxos
+
+[ios:vars]
+ansible_network_os=ios

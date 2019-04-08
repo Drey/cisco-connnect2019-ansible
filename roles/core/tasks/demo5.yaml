@@ -1,0 +1,30 @@
+---
+- name: Using NXOS checkpoints
+  block:
+    - name: Creating checkpoint
+      nxos_rollback:
+        checkpoint_file: backup.cfg
+
+    - name: Configure vlans
+      nxos_vlan:
+        vlan_range: 100-200
+        state: present
+
+    - name: Trying to configure wrong interface
+      nxos_interface:
+        name: Ethernet2/3
+        state: present
+        admin_state: up
+
+    - name: We should never get to this task!
+      debug:
+        msg: "Wrong interface configured"
+  rescue:
+    - name: Rollback to the latest checkpoint
+      nxos_rollback:
+        rollback_to: backup.cfg
+  always:
+    - name: This task always executed!
+      debug:
+        msg: "Hi folks!"
+  tags: demo5

@@ -1,0 +1,16 @@
+---
+- name: Get more information about devices
+  nxos_facts:
+    gather_subset: all
+  tags: demo6
+
+- name: debug
+  debug:
+    var: ansible_facts
+  tags: demo6
+
+# - name: Trigger manual failure
+#   fail:
+#     msg: 'Yey! I just found the device with S/N TM40020000B'
+#   when: ansible_facts['net_serialnum'] == 'TM40020000B' # Change switch S/N!
+#   tags: demo6

@@ -1,0 +1,14 @@
+---
+- name: Configuring interfaces
+  nxos_interface:
+    name: "{{ item.name }}"
+    mode: "{{ item.mode }}"
+    state: absent
+    admin_state: "{{ item.admin_state }}"
+  loop: "{{ interface_list }}"
+  tags: demo3
+
+# - name: Configuring interfaces
+#   nxos_interface:
+#     aggregate: "{{ interface_list }}"
+#   tags: demo3

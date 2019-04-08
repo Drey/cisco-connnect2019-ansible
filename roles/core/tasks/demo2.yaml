@@ -1,0 +1,8 @@
+---
+- name: Configuring NTP servers
+  nxos_ntp:
+    server: "{{ item }}"
+    state: present
+    vrf_name: management
+  loop: "{{ ntp_servers }}"
+  tags: demo2

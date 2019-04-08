@@ -1,0 +1,11 @@
+---
+- name: Configuring interfaces
+  nxos_interface:
+    name: "{{ item.name }}"
+    description: "This is how conditions work!"
+    mode: "{{ item.mode }}"
+    admin_state: "{{ item.admin_state }}"
+    state: "{{ item.state }}"
+  loop: "{{ interface_list }}"
+  tags: demo4
+  when: inventory_hostname == 'nexus1' and item.name == 'Ethernet2/1'

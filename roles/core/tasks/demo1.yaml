@@ -1,0 +1,16 @@
+---
+- name: Configuring a NXOS access-list
+  nxos_config:
+    lines:
+      - 10 deny ip any 10.0.0.0/8
+      - 20 deny ip any 172.16.0.0/12
+      - 30 deny ip any 192.168.0.0/16
+      - 40 deny ip 10.0.0.0/8 any
+      - 50 deny ip 172.16.0.0/12 any
+      - 60 deny ip 192.168.0.0/16 any
+      - 70 permit ip any any
+    parents: ip access-list deny-rfc1918
+    before: no ip access-list deny-rfc1918
+    match: exact
+    backup: true
+  tags: demo1

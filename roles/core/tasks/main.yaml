@@ -1,0 +1,8 @@
+---
+- include: demo1.yaml
+- include: demo2.yaml
+- include: demo3.yaml
+- include: demo4.yaml
+- include: demo5.yaml
+- include: demo6.yaml
+- include: demo7.yaml

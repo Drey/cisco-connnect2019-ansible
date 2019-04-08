@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<topology xmlns="http://www.cisco.com/VIRL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" schemaVersion="0.95" xsi:schemaLocation="http://www.cisco.com/VIRL https://raw.github.com/CiscoVIRL/schema/v0.95/virl.xsd">
+    <extensions>
+        <entry key="management_network" type="String">flat</entry>
+    </extensions>
+    <node name="router1" type="SIMPLE" subtype="CSR1000v" location="438,203">
+        <extensions>
+            <entry key="static_ip" type="String">172.16.1.133</entry>
+            <entry key="config" type="String">hostname router1
+
+ip domain name moslab.cisco.com
+
+username admin privilege 15 secret 5 $1$W0Ei$uXHHrce0fYuFi7ZySY05x0
+
+crypto key generate rsa modulus 2048
+ip http secure-server
+
+
+interface GigabitEthernet1
+ ip address 172.16.1.133 255.255.255.0
+ negotiation auto
+ no mop enabled
+ no mop sysid
+
+line vty 5 15
+ login local
+ transport input all</entry>
+        </extensions>
+        <interface id="0" name="GigabitEthernet2"/>
+        <interface id="1" name="GigabitEthernet3"/>
+    </node>
+    <node name="nexus1" type="SIMPLE" subtype="NX-OSv" location="355,311">
+        <extensions>
+            <entry key="static_ip" type="String">172.16.1.131</entry>
+            <entry key="config" type="String">hostname nexus1
+
+feature telnet
+feature nxapi
+
+no password strength-check
+username admin password 5 $1$KuOSBsvW$Cy0TSD..gEBGBPjzpDgf51  role network-admin
+
+vlan 1
+
+interface mgmt0
+  description OOB Management
+  vrf member management
+  ip address 172.16.1.131/24
+    no shutdown</entry>
+        </extensions>     
+        <interface id="0" name="Ethernet2/1"/>
+        <interface id="1" name="Ethernet2/2"/>
+        <interface id="2" name="Ethernet2/3"/>
+    </node>
+    <node name="nexus2" type="SIMPLE" subtype="NX-OSv" location="516,309">
+        <extensions>
+            <entry key="static_ip" type="String">172.16.1.132</entry>
+            <entry key="config" type="String">hostname nexus2
+
+feature telnet
+feature nxapi
+
+no password strength-check
+username admin password 5 $1$KuOSBsvW$Cy0TSD..gEBGBPjzpDgf51  role network-admin
+
+vlan 1
+
+interface mgmt0
+  description OOB Management
+  vrf member management
+  ip address 172.16.1.132/24
+    no shutdown</entry>
+        </extensions>
+        <interface id="0" name="Ethernet2/1"/>
+        <interface id="1" name="Ethernet2/2"/>
+        <interface id="2" name="Ethernet2/3"/>
+    </node>
+    <annotations/>
+    <connection dst="/virl:topology/virl:node[3]/virl:interface[1]" src="/virl:topology/virl:node[2]/virl:interface[1]"/>
+    <connection dst="/virl:topology/virl:node[3]/virl:interface[2]" src="/virl:topology/virl:node[2]/virl:interface[2]"/>
+    <connection dst="/virl:topology/virl:node[1]/virl:interface[1]" src="/virl:topology/virl:node[2]/virl:interface[3]"/>
+    <connection dst="/virl:topology/virl:node[1]/virl:interface[2]" src="/virl:topology/virl:node[3]/virl:interface[3]"/>
+</topology>

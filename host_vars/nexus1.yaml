@@ -1,0 +1,12 @@
+---
+interface_list:
+  - name: Ethernet2/1
+    description: "Test description #1"
+    state: present
+    admin_state: up
+    mode: layer2
+  - name: Ethernet2/2
+    description: "Test description #2"
+    state: present
+    admin_state: up
+    mode: layer2
